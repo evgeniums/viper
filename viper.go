@@ -2018,6 +2018,12 @@ func (v *Viper) flattenAndMergeMap(shadow map[string]bool, m map[string]interfac
 		shadow = make(map[string]bool)
 	}
 
+	// append key for empty map
+	if len(m) == 0 {
+		shadow[strings.ToLower(prefix)] = true
+		return shadow
+	}	
+	
 	var m2 map[string]interface{}
 	if prefix != "" {
 		prefix += v.keyDelim
